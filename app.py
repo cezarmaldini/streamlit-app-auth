@@ -5,7 +5,8 @@ from datetime import datetime
 # Configurar a página
 st.set_page_config(
     page_title="Tático Soluções",
-    page_icon="🎯"
+    page_icon="🎯",
+    layout='wide'
 )
 
 def main():
@@ -15,39 +16,30 @@ def main():
     if not st.user.is_logged_in:
         # Tela de login
         st.info("🔐 Faça login para acessar a aplicação")
-        
-        # Layout com informações e botão
-        col1, col2 = st.columns([2, 1])
-        
-        with col1:
-            st.subheader("Bem-vindo!")
-            st.write("""
-            Esta é uma aplicação protegida com Microsoft Entra ID.
             
-            **Recursos disponíveis após login:**
-            - 🤖 Chatbot IA
-            - 📃 Upload de Propostas
-            - 👤 Perfil do usuário
-            """)
+        st.subheader("Bem-vindo!")
+        st.write("""
+        Esta é uma aplicação protegida com Microsoft Entra ID.
             
-        with col2:
-            st.subheader("Login")
-            st.write("Clique no botão abaixo para fazer login:")
+        **Recursos disponíveis após login:**
+        - 🤖 Chatbot IA
+        - 📃 Upload de Propostas
+        - 👤 Perfil do usuário
+        """)
+
+        st.subheader("Login")
+        st.write("Clique no botão abaixo para fazer login:")
             
-            # Botão de login centralizado
-            if st.button("🚀 Entrar com Microsoft", 
+        # Botão de login centralizado
+        if st.button("🚀 Entrar com Microsoft", 
                         type="primary", 
                         use_container_width=True,
                         key="login_button"):
-                try:
-                    st.login(provider="microsoft")
-                except Exception as e:
-                    st.error(f"Erro no login: {e}")
-                    st.info("Verifique se as credenciais estão corretas no secrets.toml")
-        
-        # Adicionar algumas informações extras
-        st.divider()
-        st.write("💡 **Dica:** Use suas credenciais corporativas para fazer login.")
+            try:
+                st.login(provider="microsoft")
+            except Exception as e:
+                st.error(f"Erro no login: {e}")
+                st.info("Verifique se as credenciais estão corretas no secrets.toml")
         
     else:
         # Usuário está logado - mostrar informações e conteúdo
@@ -59,16 +51,16 @@ def main():
             option = option_menu(
                 menu_title="Navegação",
                 options=["Chatbot", "Upload"],
-                icons=["database-add", "folder-plus"],
+                icons=["robot", "folder-plus"],
                 menu_icon="card-list",
                 default_index=0
             )
-            st.header("👤 Perfil")
+            st.subheader("👤 Perfil")
             st.write(f"**Nome:** {st.user.name}")
             st.write(f"**Email:** {st.user.email}")
             
             # Botão de logout na sidebar
-            if st.button("🚪 Sair", use_container_width=True):
+            if st.button("Sair", use_container_width=True):
                 st.logout()
                 st.rerun()
         
