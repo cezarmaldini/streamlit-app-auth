@@ -4,16 +4,16 @@ from datetime import datetime
 
 # Configurar a página
 st.set_page_config(
-    page_title="Streamlit + Microsoft Entra ID",
-    page_icon="🔐"
+    page_title="Tático Soluções",
+    page_icon="🎯"
 )
 
 def main():
-    st.title("🔐 Streamlit + Microsoft Entra ID")
+    st.title("🎯 Tático Soluções")
     
     # Verificar se o usuário está logado
     if not st.user.is_logged_in:
-        # Tela de login - NÃO faz login automático
+        # Tela de login
         st.info("🔐 Faça login para acessar a aplicação")
         
         # Layout com informações e botão
@@ -25,10 +25,9 @@ def main():
             Esta é uma aplicação protegida com Microsoft Entra ID.
             
             **Recursos disponíveis após login:**
-            - 📊 Dashboard personalizado
+            - 🤖 Chatbot IA
+            - 📃 Upload de Propostas
             - 👤 Perfil do usuário
-            - 🔒 Dados protegidos
-            - ⚙️ Configurações exclusivas
             """)
             
         with col2:
@@ -59,8 +58,8 @@ def main():
         with st.sidebar:
             option = option_menu(
                 menu_title="Navegação",
-                options=["Vagas", "Upload", "Relatórios"],
-                icons=["database-add", "folder-plus", "robot"],
+                options=["Chatbot", "Upload"],
+                icons=["database-add", "folder-plus"],
                 menu_icon="card-list",
                 default_index=0
             )
