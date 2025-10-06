@@ -1,29 +1,38 @@
 import streamlit as st
+import streamlit_antd_components as sac
 
 def st_login():
 # Tela de login
-    st.info("🔐 Faça login para acessar a aplicação")
-            
-    st.subheader("Bem-vindo!")
-    st.write("""
-    Esta é uma aplicação protegida com Microsoft Entra ID.
-            
-    **Recursos disponíveis após login:**
-    - Chatbot IA
-    - Upload de Propostas
-    - Perfil do usuário
-    """)
+    left, center, right = st.columns([1,2, 1])
+    with center:
+        st.title("🎯 Tático Soluções")
+        st.info("🔐 Faça login para acessar a aplicação")
+                
+        st.subheader("Bem-vindo!")
+        st.write("""
+        Esta é uma aplicação protegida com Microsoft Entra ID.
+                
+        **Recursos disponíveis após login:**
+        - Chatbot IA
+        - Upload de Propostas
+        - Perfil do usuário
+        """)
+                
+        sac.buttons(
+                items=[
+                    sac.ButtonsItem(label='Entrar com Microsoft', icon='microsoft'),
+                    sac.ButtonsItem(label='')
+                ],
+                label='',
+                description='Clique no botão abaixo para fazer login.',
+                align='center',
+                direction='horizontal',
+                index=None,
+                variant='text',
+                key='btn_microsoft'
+            )
 
-    st.subheader("Login")
-    st.write("Clique no botão abaixo para fazer login:")
-            
-    # Botão de login centralizado
-    col1, col2 = st.columns([1, 4])
-    with col1:
-        if st.button("🚀 Entrar com Microsoft", 
-                        type="primary", 
-                        use_container_width=True,
-                        key="login_button"):
+        if st.session_state['btn_microsoft'] == 'Entrar com Microsoft':
             try:
                 st.login(provider="microsoft")
             except Exception as e:

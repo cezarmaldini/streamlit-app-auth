@@ -10,14 +10,10 @@ st.set_page_config(
 )
 
 def main():
-    st.title("🎯 Tático Soluções")
-
-    # Verificar se o usuário está logado
     if not st.user.is_logged_in:
         st_login.st_login()
         
     else:      
-        # Sidebar com informações do usuário
         option = st_sidebar.st_sidebar()
         
         if option == 'Chatbot':
